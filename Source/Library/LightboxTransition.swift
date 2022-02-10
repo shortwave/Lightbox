@@ -12,7 +12,7 @@ class LightboxTransition: UIPercentDrivenInteractiveTransition {
 
   var interactive = false
   var dismissing = false
-  var animateDismissal = true
+  var isEnabled = true
   var initialOrigin = CGPoint(x: 0, y: 0)
 
   var scrollView: UIScrollView? {
@@ -39,6 +39,7 @@ class LightboxTransition: UIPercentDrivenInteractiveTransition {
   // MARK: - Pan gesture recognizer
 
   @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+    if isEnabled { return }
     let translation = gesture.translation(in: scrollView)
     let percentage = abs(translation.y) / UIScreen.main.bounds.height / 1.5
     let velocity = gesture.velocity(in: scrollView)
@@ -47,7 +48,7 @@ class LightboxTransition: UIPercentDrivenInteractiveTransition {
     case .began:
       interactive = true
       lightboxController?.presented = false
-      lightboxController?.dismiss(animated: animateDismissal, completion: nil)
+      lightboxController?.dismiss(animated: true, completion: nil)
       if let origin = scrollView?.frame.origin { initialOrigin = origin }
     case .changed:
       update(percentage)

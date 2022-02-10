@@ -149,7 +149,7 @@ open class LightboxController: UIViewController {
 
   open var animateTransition: Bool = true {
     didSet {
-      transitionManager.animateDismissal = animateTransition
+      transitionManager.isEnabled = animateTransition
     }
   }
 
