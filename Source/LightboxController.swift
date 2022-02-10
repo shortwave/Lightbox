@@ -147,6 +147,12 @@ open class LightboxController: UIViewController {
   var pageViews = [PageView]()
   var statusBarHidden = false
 
+  open var animateTransition: Bool = true {
+    didSet {
+      transitionManager.animateDismissal = animateTransition
+    }
+  }
+
   fileprivate var initialImages: [LightboxImage]
   fileprivate let initialPage: Int
 
@@ -452,7 +458,7 @@ extension LightboxController: HeaderViewDelegate {
     closeButton.isEnabled = false
     presented = false
     dismissalDelegate?.lightboxControllerWillDismiss(self)
-    dismiss(animated: true, completion: nil)
+    dismiss(animated: animateDismissal, completion: nil)
   }
 }
 
