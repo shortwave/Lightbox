@@ -39,7 +39,7 @@ class LightboxTransition: UIPercentDrivenInteractiveTransition {
   // MARK: - Pan gesture recognizer
 
   @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
-    if isEnabled { return }
+    if !isEnabled { return }
     let translation = gesture.translation(in: scrollView)
     let percentage = abs(translation.y) / UIScreen.main.bounds.height / 1.5
     let velocity = gesture.velocity(in: scrollView)
