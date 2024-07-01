@@ -37,8 +37,9 @@ class ViewController: UIViewController {
                 text: "Photography is the science, art, application and practice of creating durable images by recording light or other electromagnetic radiation, either electronically by means of an image sensor, or chemically by means of a light-sensitive material such as photographic film"
             ),
             
-            LightboxImage(imageURL: URL(string: "https://via.placeholder.com/300x600.png/fff/000")!),
-
+            LightboxImage(imageURL: URL(string: "https://via.placeholder.com/300x600.png/fff/09f")!),
+            
+            
             LightboxImage(
                 image: UIImage(named: "photo2")!,
                 text: "Emoji 😍 (/ɪˈmoʊdʒi/; singular emoji, plural emoji or emojis;[4] from the Japanese 絵文字えもじ, pronounced [emodʑi]) are ideograms and smileys used in electronic messages and web pages. Emoji are used much like emoticons and exist in various genres, including facial expressions, common objects, places and types of weather 🌅☔️💦, and animals 🐶🐱",

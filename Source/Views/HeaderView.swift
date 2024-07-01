@@ -67,9 +67,13 @@ open class HeaderView: UIView {
   public init() {
     super.init(frame: CGRect.zero)
 
-    backgroundColor = UIColor.clear
+    backgroundColor = UIColor.black.withAlphaComponent(0.2)
 
-    [closeButton, deleteButton].forEach { addSubview($0) }
+    let buttonView = UIView()
+    addSubview(buttonView)
+    buttonView.frame = CGRect(x: 0, y: 15, width: self.bounds.width, height: self.bounds.height)
+
+    [closeButton, deleteButton].forEach { buttonView.addSubview($0) }
   }
 
   public required init?(coder aDecoder: NSCoder) {

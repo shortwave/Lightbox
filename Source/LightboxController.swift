@@ -195,7 +195,7 @@ open class LightboxController: UIViewController {
   open override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
 
-    scrollView.frame = calcScrollViewFrame(view.bounds.size)
+    scrollView.frame = view.bounds
     footerView.frame.size = CGSize(
       width: view.bounds.width,
       height: 100
@@ -208,9 +208,9 @@ open class LightboxController: UIViewController {
 
     headerView.frame = CGRect(
       x: 0,
-      y: 16,
+      y: 0,
       width: view.bounds.width,
-      height: 45
+      height: 60
     )
     
     if !presented {
@@ -303,10 +303,10 @@ open class LightboxController: UIViewController {
   // MARK: - Layout
 
   open func configureLayout(_ size: CGSize) {
-    scrollView.frame = calcScrollViewFrame(size)
+    scrollView.frame.size = size
     scrollView.contentSize = CGSize(
       width: size.width * CGFloat(numberOfPages) + spacing * CGFloat(numberOfPages - 1),
-      height: scrollView.frame.height)
+      height: size.height)
     scrollView.contentOffset = CGPoint(x: CGFloat(currentPage) * (size.width + spacing), y: 0)
 
     for (index, pageView) in pageViews.enumerated() {
@@ -325,16 +325,6 @@ open class LightboxController: UIViewController {
     overlayView.resizeGradientLayer()
   }
 
-  fileprivate func calcScrollViewFrame(_ size: CGSize) -> CGRect {
-    let headerVisible = headerView.alpha == 1
-    let headerHeight = headerView.frame.minY + headerView.frame.height
-    if (headerVisible) {
-      return CGRect(x: 0, y: headerHeight, width: size.width, height: size.height - headerHeight*2)
-    } else {
-      return CGRect(x: 0, y: 0, width: size.width, height: size.height)
-    }
-  }
-
   fileprivate func loadDynamicBackground(_ image: UIImage) {
     backgroundView.image = image
     backgroundView.layer.add(CATransition(), forKey: "fade")
@@ -349,9 +339,7 @@ open class LightboxController: UIViewController {
       self.headerView.alpha = alpha
       self.footerView.alpha = alpha
       pageView?.playButton.alpha = alpha
-    }, completion: {_ in
-      self.configureLayout(self.view.bounds.size)
-    })
+    }, completion: nil)
   }
 
   // MARK: - Helper functions
