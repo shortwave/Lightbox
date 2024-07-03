@@ -53,7 +53,7 @@ class PageView: UIScrollView {
   weak var pageViewDelegate: PageViewDelegate?
 
   var hasZoomed: Bool {
-    return zoomScale != 1.0
+    return zoomScale != minimumZoomScale
   }
 
   // MARK: - Initializers
@@ -138,9 +138,8 @@ class PageView: UIScrollView {
     let newZoomScale = zoomScale > minimumZoomScale
       ? minimumZoomScale
       : maximumZoomScale
-
-    let width = contentFrame.size.width / newZoomScale
-    let height = contentFrame.size.height / newZoomScale
+    let width = imageView.frame.width / newZoomScale
+    let height = imageView.frame.height / newZoomScale
     let x = pointInView.x - (width / 2.0)
     let y = pointInView.y - (height / 2.0)
 
@@ -169,20 +168,30 @@ class PageView: UIScrollView {
     }
 
     let imageViewSize = imageView.frame.size
-    let imageSize = image.size
-    let realImageViewSize: CGSize
 
+    let imageSize = image.size
+    let newImageViewSize: CGSize
+
+    // Size the imageView so that it has the same aspect ratio as the image, while using the
+    // maximum possible width or height.
     if imageSize.width / imageSize.height > imageViewSize.width / imageViewSize.height {
-      realImageViewSize = CGSize(
+      newImageViewSize = CGSize(
         width: imageViewSize.width,
         height: imageViewSize.width / imageSize.width * imageSize.height)
     } else {
-      realImageViewSize = CGSize(
+      newImageViewSize = CGSize(
         width: imageViewSize.height / imageSize.height * imageSize.width,
         height: imageViewSize.height)
     }
 
-    imageView.frame = CGRect(origin: CGPoint.zero, size: realImageViewSize)
+    imageView.frame = CGRect(origin: CGPoint.zero, size: newImageViewSize)
+
+    // We zoom the image out if necessary to leave space for the header / footer to be visible.
+    let maxHeight = imageViewSize.height - 120
+    if (imageView.frame.height > maxHeight) {
+      minimumZoomScale = maxHeight / imageView.frame.height
+      zoomScale = minimumZoomScale
+    }
 
     centerImageView()
   }

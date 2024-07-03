@@ -208,9 +208,9 @@ open class LightboxController: UIViewController {
 
     headerView.frame = CGRect(
       x: 0,
-      y: 0,
+      y: 15,
       width: view.bounds.width,
-      height: 60
+      height: 45
     )
     
     if !presented {
