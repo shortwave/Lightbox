@@ -24,7 +24,7 @@ class PageView: UIScrollView {
     let button = UIButton(type: .custom)
     button.frame.size = CGSize(width: 60, height: 60)
     var buttonImage = AssetManager.image("lightbox_play")
-    
+
     // Note by Elvis Nuñez on Mon 22 Jun 08:06
     // When using SPM you might find that assets are note included. This is a workaround to provide default assets
     // under iOS 13 so using SPM can work without problems.
@@ -168,12 +168,11 @@ class PageView: UIScrollView {
     }
 
     let imageViewSize = imageView.frame.size
-
     let imageSize = image.size
-    let newImageViewSize: CGSize
 
     // Size the imageView so that it has the same aspect ratio as the image, while using the
     // maximum possible width or height.
+    let newImageViewSize: CGSize
     if imageSize.width / imageSize.height > imageViewSize.width / imageViewSize.height {
       newImageViewSize = CGSize(
         width: imageViewSize.width,
