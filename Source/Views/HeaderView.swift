@@ -12,6 +12,9 @@ open class HeaderView: UIView {
       attributes: LightboxConfig.CloseButton.textAttributes)
 
     let button = UIButton(type: .system)
+    button.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+    button.layer.cornerRadius = 10
+    button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 8)
 
     button.setAttributedTitle(title, for: UIControl.State())
 
@@ -39,6 +42,9 @@ open class HeaderView: UIView {
       attributes: LightboxConfig.DeleteButton.textAttributes)
 
     let button = UIButton(type: .system)
+    button.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+    button.layer.cornerRadius = 10
+    button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 8)
 
     button.setAttributedTitle(title, for: .normal)
 
