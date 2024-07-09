@@ -187,7 +187,7 @@ class PageView: UIScrollView {
 
     // We zoom the image out if necessary to leave space for the header / footer to be visible.
     let maxHeight = imageViewSize.height - 120
-    if (imageView.frame.height > maxHeight) {
+    if (maxHeight > 0 && imageView.frame.height > maxHeight) {
       minimumZoomScale = maxHeight / imageView.frame.height
       zoomScale = minimumZoomScale
     }
