@@ -23,6 +23,8 @@ class ViewController: UIViewController {
     view.addSubview(showButton)
     title = "Lightbox"
     LightboxConfig.preload = 2
+    // Ideally we'd hide the status bar but in shortwave it doesn't work because react-native is controlling it.
+    LightboxConfig.hideStatusBar = false
   }
   
   // MARK: - Action methods

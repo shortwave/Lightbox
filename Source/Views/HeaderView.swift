@@ -102,11 +102,12 @@ extension HeaderView: LayoutConfigurable {
 
   @objc public func configureLayout() {
     let topPadding: CGFloat
+    let statusBarPadding: CGFloat = LightboxConfig.hideStatusBar ? 0 : 8
 
     if #available(iOS 11, *) {
-      topPadding = safeAreaInsets.top
+      topPadding = safeAreaInsets.top + statusBarPadding
     } else {
-      topPadding = 0
+      topPadding = statusBarPadding
     }
 
     closeButton.frame.origin = CGPoint(
