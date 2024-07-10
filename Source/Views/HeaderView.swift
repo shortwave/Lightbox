@@ -89,6 +89,9 @@ open class HeaderView: UIView {
   }
 
   @objc func closeButtonDidPress(_ button: UIButton) {
+    let generator = UIImpactFeedbackGenerator(style: .medium)
+    generator.prepare()
+    generator.impactOccurred()
     delegate?.headerView(self, didPressCloseButton: button)
   }
 }
